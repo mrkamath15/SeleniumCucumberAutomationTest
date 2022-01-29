@@ -4,6 +4,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import managers.FileReaderManager;
 import managers.PageObjectManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,11 +20,11 @@ public class LoginSteps {
 
     @Given("user is in home page")
     public void user_is_in_home_page() {
-        System.setProperty("webdriver.chrome.driver", ".//src//test//resources//drivers//chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", FileReaderManager.getInstance().getConfigFileReader().getDriverPath());
         driver = new ChromeDriver();
-        driver.get("https://demo.guru99.com/test/newtours/index.php");
+        driver.get(FileReaderManager.getInstance().getConfigFileReader().getApplicationUrl());
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(FileReaderManager.getInstance().getConfigFileReader().getTimeout(), TimeUnit.SECONDS);
     }
 
     @When("user enters username {string} and password {string}")
