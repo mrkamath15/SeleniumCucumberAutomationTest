@@ -1,6 +1,7 @@
 package dataProviders;
 
-import java.io.File;
+import enums.BrowserType;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,7 +14,7 @@ public class ConfigFileReader {
 
     public ConfigFileReader() {
         try {
-            fileInputStream = new FileInputStream(new File(CONFIG_FILE_PATH));
+            fileInputStream = new FileInputStream(CONFIG_FILE_PATH);
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -27,8 +28,20 @@ public class ConfigFileReader {
         }
     }
 
-    public String getBrowser() {
-        return properties.getProperty("browser");
+    public BrowserType getBrowser() {
+        String browser = properties.getProperty("browser");
+        if (browser.equalsIgnoreCase("chrome")) {
+            return BrowserType.CHROME;
+        }
+        else if (browser.equalsIgnoreCase("ie")) {
+            return BrowserType.INTERNET_EXPLORER;
+        }
+        else if (browser.equalsIgnoreCase("firefox")) {
+            return BrowserType.FIREFOX;
+        }
+        else {
+            return BrowserType.CHROME;
+        }
     }
 
     public int getTimeout() {

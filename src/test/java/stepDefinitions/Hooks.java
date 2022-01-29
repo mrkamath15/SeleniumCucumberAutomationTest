@@ -9,7 +9,8 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import io.cucumber.java.*;
-import io.cucumber.java.ro.Si;
+import org.openqa.selenium.WebDriver;
+import utility.TestContext;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,6 +19,11 @@ public class Hooks {
     static ExtentSparkReporter extentSparkReporter;
     static ExtentReports extentReports;
     static ExtentTest extentTest;
+    WebDriver driver;
+
+    public Hooks(TestContext context) {
+        driver = context.getWebDriverManager().getDriver();
+    }
 
     @BeforeAll
     public static void setUp() {
@@ -56,5 +62,6 @@ public class Hooks {
             Markup m = MarkupHelper.createLabel("Test Skipped", ExtentColor.AMBER);
             extentTest.log(com.aventstack.extentreports.Status.SKIP, m);
         }
+        driver.quit();
     }
 }
