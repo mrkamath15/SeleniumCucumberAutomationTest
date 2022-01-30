@@ -9,9 +9,15 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import io.cucumber.java.*;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
+import sun.reflect.misc.FieldUtil;
 import utility.TestContext;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -26,7 +32,7 @@ public class Hooks {
     }
 
     @BeforeAll
-    public static void setUp() {
+    public static void setUp() throws IOException {
         SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd_hh-mm-ss-SSS");
         String reportPath = "reports//TestReport_" + s.format(new Date()) + ".html";
         extentSparkReporter = new ExtentSparkReporter(reportPath);
@@ -35,6 +41,20 @@ public class Hooks {
         extentSparkReporter.config().setTheme(Theme.DARK);
         extentReports = new ExtentReports();
         extentReports.attachReporter(extentSparkReporter);
+
+        //create reports folder if doesn't exist
+        if (new File("reports").exists()) {
+            FileUtils.deleteDirectory(new File("reports"));
+        }
+
+        new File("reports").mkdir();
+
+        //create screenshots folder if doesn't exist
+        if (new File("screenshots").exists()) {
+            FileUtils.deleteDirectory(new File("screenshots"));
+        }
+
+        new File("screenshots").mkdir();
     }
 
     @AfterAll
