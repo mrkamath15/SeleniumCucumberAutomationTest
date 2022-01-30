@@ -18,11 +18,6 @@ public class LoginSteps {
         loginModule = context.getPageObjectManager().getLoginModule();
     }
 
-    @Given("user is in home page")
-    public void user_is_in_home_page() {
-        driver.get(FileReaderManager.getInstance().getConfigFileReader().getApplicationUrl());
-    }
-
     @When("user enters username {string} and password {string}")
     public void user_enters_username_and_password(String username, String password) {
         loginModule.enterUsername(username);
