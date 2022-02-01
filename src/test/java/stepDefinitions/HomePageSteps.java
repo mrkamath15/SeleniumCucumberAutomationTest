@@ -51,6 +51,11 @@ public class HomePageSteps {
         dismissIfAdsDisplayed();
     }
 
+    @When("user clicks on register link")
+    public void user_clicks_on_register_link() {
+        homePage.clickRegisterLink();
+    }
+
     @When("user clicks on destinations link")
     public void user_clicks_on_destinations_link() {
         homePage.clickDestinationsLink();
