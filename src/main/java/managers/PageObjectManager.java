@@ -1,10 +1,7 @@
 package managers;
 
 import org.openqa.selenium.WebDriver;
-import pageObjects.HomePage;
-import pageObjects.LoginModule;
-import pageObjects.RegisterPage;
-import pageObjects.UnderConstructionModule;
+import pageObjects.*;
 
 public class PageObjectManager {
     WebDriver driver;
@@ -12,6 +9,7 @@ public class PageObjectManager {
     HomePage homePage;
     UnderConstructionModule underConstructionModule;
     RegisterPage registerPage;
+    FlightsPage flightsPage;
 
     public PageObjectManager(WebDriver driver) {
         this.driver = driver;
@@ -31,5 +29,9 @@ public class PageObjectManager {
 
     public RegisterPage getRegisterPage() {
         return (registerPage == null) ? new RegisterPage(driver) : registerPage;
+    }
+
+    public FlightsPage getFlightsPage() {
+        return (flightsPage == null) ? new FlightsPage(driver) : flightsPage;
     }
 }

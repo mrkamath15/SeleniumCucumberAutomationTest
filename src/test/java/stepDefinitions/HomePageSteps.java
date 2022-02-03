@@ -56,6 +56,12 @@ public class HomePageSteps {
         homePage.clickRegisterLink();
     }
 
+    @When("user clicks on flights link")
+    public void user_clicks_on_flights_link() {
+        homePage.clickFlightsLink();
+    }
+
+
     @When("user clicks on destinations link")
     public void user_clicks_on_destinations_link() {
         homePage.clickDestinationsLink();
