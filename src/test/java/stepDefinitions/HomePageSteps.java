@@ -59,6 +59,11 @@ public class HomePageSteps {
     @When("user clicks on flights link")
     public void user_clicks_on_flights_link() {
         homePage.clickFlightsLink();
+
+        //ToDO - Need to handle the ad here
+        if (driver.getCurrentUrl() != "https://demo.guru99.com/test/newtours/reservation.php") {
+            driver.navigate().to("https://demo.guru99.com/test/newtours/reservation.php");
+        }
     }
 
 
@@ -83,7 +88,7 @@ public class HomePageSteps {
     Temporary code to override the advertisement
      */
     public void dismissIfAdsDisplayed() {
-        if (driver.getCurrentUrl().equalsIgnoreCase("https://demo.guru99.com/test/newtours/index.php#google_vignette")) {
+        if (driver.getCurrentUrl() != "https://demo.guru99.com/test/newtours/support.php") {
             driver.navigate().to("https://demo.guru99.com/test/newtours/support.php");
         }
     }
